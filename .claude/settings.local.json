@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Sleep -Seconds 8; try { $r = Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 8; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\Finanzas_Personales_APP\\\\finanzas-app\\\\src\\\\app\\\\api\\\\score\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\Finanzas_Personales_APP\\\\finanzas-app\\\\src\\\\app\\\\api\\\\transactions\\\\import\")",
+      "PowerShell(taskkill /PID 2432 /F 2>&1)",
+      "PowerShell(netstat -ano)",
+      "PowerShell(head -5)",
+      "PowerShell(taskkill /PID 4460 /F 2>&1)",
+      "PowerShell(cd \"c:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\Finanzas_Personales_APP\\\\finanzas-app\"; $env:NODE_ENV=\"development\"; npm run dev)"
+    ]
+  }
+}
