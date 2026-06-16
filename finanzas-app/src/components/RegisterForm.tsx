@@ -3,14 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, User, TrendingUp, ArrowRight, Loader2, Check } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Loader2, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const benefits = [
   "Dashboard personalizado en tiempo real",
   "Presupuestos y metas de ahorro",
   "Reportes y gráficas detalladas",
   "100% seguro y privado",
+];
+
+const floatingCards = [
+  { label: "Balance total", value: "+$12,400", color: "from-emerald-500/20 to-teal-500/20", border: "border-emerald-500/20", top: "18%", left: "62%", delay: 0 },
+  { label: "Meta de ahorro", value: "72% logrado", color: "from-violet-500/20 to-purple-500/20", border: "border-violet-500/20", top: "52%", left: "66%", delay: 1.5 },
+  { label: "Gastos este mes", value: "-$890", color: "from-amber-500/20 to-orange-500/20", border: "border-amber-500/20", top: "76%", left: "58%", delay: 3 },
 ];
 
 const passwordRules = [
@@ -53,13 +60,25 @@ export default function RegisterForm() {
 
   return (
     <div className="min-h-screen flex overflow-hidden" style={{ background: "#080b14" }}>
-      {/* */}
+      {/* LEFT PANEL */}
       <div className="hidden lg:flex lg:w-[45%] relative flex-col justify-between p-12 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 30% 60%, rgba(16,185,129,0.1) 0%, transparent 60%), radial-gradient(ellipse 50% 70% at 70% 10%, rgba(139,92,246,0.07) 0%, transparent 60%)",
+              "radial-gradient(ellipse 80% 60% at 20% 50%, rgba(16,185,129,0.12) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 60%)",
+          }}
+        />
+        <div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 480,
+            height: 480,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)",
+            filter: "blur(40px)",
           }}
         />
 
@@ -69,9 +88,7 @@ export default function RegisterForm() {
           transition={{ duration: 0.6 }}
           className="relative z-10 flex items-center gap-3"
         >
-          <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-            <TrendingUp size={20} className="text-white" />
-          </div>
+          <Image src="/logo.png" alt="Finora" width={44} height={44} className="rounded-xl" />
           <span className="text-white font-bold text-xl tracking-tight">Finora</span>
         </motion.div>
 
@@ -84,12 +101,12 @@ export default function RegisterForm() {
             <p className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-3">
               Empieza hoy
             </p>
-            <h1 className="text-white font-bold text-4xl leading-tight">
+            <h1 className="text-white font-bold leading-tight" style={{ fontSize: "clamp(2rem, 3vw, 3rem)" }}>
               Crea tu cuenta <br />
               <span className="shimmer-text">en segundos</span>
             </h1>
-            <p className="text-slate-400 mt-4 leading-relaxed">
-              
+            <p className="text-slate-400 mt-4 text-base leading-relaxed max-w-sm">
+              Únete a miles de personas que ya controlan su dinero de forma inteligente.
             </p>
           </motion.div>
 
@@ -116,27 +133,30 @@ export default function RegisterForm() {
           </motion.ul>
         </div>
 
+        {/* Floating stat cards */}
+        {floatingCards.map((card, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 + i * 0.15 }}
+            className={`float-${i + 1} absolute glass-card rounded-2xl px-4 py-3 bg-gradient-to-br ${card.color} border ${card.border}`}
+            style={{ top: card.top, left: card.left, zIndex: 1 }}
+          >
+            <p className="text-slate-400 text-[10px] uppercase tracking-wider">{card.label}</p>
+            <p className="text-white font-bold text-base mt-0.5">{card.value}</p>
+          </motion.div>
+        ))}
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="relative z-10"
+          className="relative z-10 flex items-center gap-3"
         >
-          <div className="glass-card rounded-2xl p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="flex -space-x-2">
-                {["A","B","C","D"].map((e, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-slate-700 border-2 border-slate-900 flex items-center justify-center text-xs text-slate-400 font-bold">
-                    {e}
-                  </div>
-                ))}
-              </div>
-              <p className="text-slate-300 text-sm">+10,000 usuarios activos</p>
-            </div>
-            <p className="text-slate-400 text-xs italic">
-              "Finora cambió cómo manejo mi dinero. Ahorro un 30% más cada mes."
-            </p>
-          </div>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+          <p className="text-slate-600 text-xs">Seguro · Privado · Tuyo</p>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
         </motion.div>
       </div>
 
@@ -156,9 +176,7 @@ export default function RegisterForm() {
           className="w-full max-w-md relative z-10"
         >
           <div className="lg:hidden flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-              <TrendingUp size={16} className="text-white" />
-            </div>
+            <Image src="/logo.png" alt="Finora" width={34} height={34} className="rounded-lg" />
             <span className="text-white font-bold">Finora</span>
           </div>
 
