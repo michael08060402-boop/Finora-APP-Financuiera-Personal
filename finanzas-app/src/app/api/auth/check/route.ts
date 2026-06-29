@@ -1,0 +1,14 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export async function POST(req: NextRequest) {
+  const { email } = await req.json();
+  if (!email) return NextResponse.json({ suspended: false });
+
+  const user = await prisma.user.findUnique({
+    where:  { email },
+    select: { isActive: true },
+  });
+
+  return NextResponse.json({ suspended: user ? !user.isActive : false });
+}

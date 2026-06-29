@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String    @default("user")
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts     Account[]
+  sessions     Session[]
+  transactions Transaction[]
+  budgets      Budget[]
+  goals        Goal[]
+  wallets      Wallet[]
+  activityLogs ActivityLog[]
+  debts        Debt[]
+  suggestions  Suggestion[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Budget {
+  id        String   @id @default(cuid())
+  userId    String
+  category  String
+  amount    Float
+  month     Int
+  year      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, category, month, year])
+}
+
+model Goal {
+  id            String    @id @default(cuid())
+  userId        String
+  name          String
+  description   String?
+  targetAmount  Float
+  currentAmount Float     @default(0)
+  deadline      DateTime?
+  color         String    @default("#10b981")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  type      String
+  balance   Float    @default(0)
+  color     String   @default("#10b981")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String
+  action      String
+  entity      String
+  description String
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Debt {
+  id          String    @id @default(cuid())
+  userId      String
+  personName  String
+  amount      Float
+  paid        Float     @default(0)
+  description String?
+  type        String    // "i_owe" | "owed_to_me"
+  status      String    @default("pending") // "pending" | "partial" | "paid"
+  dueDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Suggestion {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  status    String   @default("pending") // "pending" | "reviewed" | "implemented"
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LoginHistory {
+  id        String   @id @default(cuid())
+  email     String
+  userId    String?
+  success   Boolean
+  provider  String   @default("credentials")
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime
+  description String
+  amount      Float
+  type        String   // "income" | "expense"
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

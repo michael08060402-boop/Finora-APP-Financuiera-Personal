@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" status --short 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" status --short)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" add -A 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" push origin main 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" pull origin main --rebase 2>&1)",
+      "PowerShell(git -C $root rm -f \"auth.ts\" \"package-lock.json\" \"package.json\" \"src/components/RegisterForm.tsx\" 2>&1)",
+      "PowerShell(git -C $root add \"finanzas-app/auth.ts\" \"finanzas-app/package-lock.json\" 2>&1)",
+      "PowerShell($root = \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\")",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" rebase --continue 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" log --oneline -10 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" show --stat HEAD~1 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" checkout fcdc329 -- \"finanzas-app/src\" \"finanzas-app/prisma\" \"finanzas-app/public\" \"finanzas-app/package.json\" \"finanzas-app/next.config.ts\" \"finanzas-app/eslint.config.mjs\" \"finanzas-app/postcss.config.mjs\" \"finanzas-app/tsconfig.json\" 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" add \"finanzas-app/src\" \"finanzas-app/prisma\" \"finanzas-app/public\" \"finanzas-app/package.json\" \"finanzas-app/next.config.ts\" \"finanzas-app/eslint.config.mjs\" \"finanzas-app/postcss.config.mjs\" \"finanzas-app/tsconfig.json\" 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" add README.md \"finanzas-app/src/app/api/register/route.ts\" \"finanzas-app/.gitignore\" 2>&1)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Asus\\\\OneDrive\\\\Escritorio\\\\visualStudio\\\\Finanzas_Personales_APP\" diff --name-only 2>&1)",
+      "PowerShell(git -C $root add \"finanzas-app/auth.ts\")",
+      "PowerShell(git -C $root commit -m \"fix eslint errors in auth.ts`n`nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\")",
+      "PowerShell(git -C $root push origin main 2>&1)",
+      "PowerShell(git -C $root log --oneline -5)",
+      "PowerShell(git -C $root status --short)",
+      "PowerShell(git -C $root fetch origin)",
+      "PowerShell(git -C $root reset --hard origin/main 2>&1)",
+      "Bash(npx tsc *)",
+      "Bash(npx next *)",
+      "Bash(mkdir -p \"C:/Users/Asus/OneDrive/Escritorio/visualStudio/Finanzas_Personales_APP/finanzas-app/src/app/\\(admin\\)/admin/users/[id]\")",
+      "Bash(mkdir -p \"C:/Users/Asus/OneDrive/Escritorio/visualStudio/Finanzas_Personales_APP/finanzas-app/src/app/api/admin/suggestions/[id]\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Asus\\OneDrive\\Escritorio\\visualStudio\\Finanzas_Personales_APP\\finanzas-app\\src\\app\\(admin)\\admin\\users",
+      "C:\\Users\\Asus\\OneDrive\\Escritorio\\visualStudio\\Finanzas_Personales_APP\\finanzas-app\\src\\app\\api\\admin\\suggestions"
+    ]
+  }
+}
